@@ -15,14 +15,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebProjekt Highlight Fix</title>
     
-    <link rel="stylesheet" href="./ressourcen/style.css">
-	<script src="./ressourcen/script.js"></script>
+	<!-- Favicon -->
+	<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+
+	<!-- Stylesheet -->
+    <link rel="stylesheet" href="./css/style.css">	
 	
-	<link rel="stylesheet" href="./ressourcen/tabulator.css">
-	<script src="./ressourcen/tabulator.min.js"></script>
-	
-	<script src="./ressourcen/jquery.js"></script>
-	
-	<script src="./ressourcen/chart.js"></script>
+	<!-- Tabulator -->
+	<link rel="stylesheet" href="./tabulator/tabulator.css">
+	<script src="./tabulator/tabulator.min.js"></script>
+	<!-- Chartjs -->
+	<script src="./chartjs/Chart.js"></script>
+
+	<!-- jQuery and Custom Script -->
+	<script src="./script/jquery.js"></script>
+	<script src="./script/menu_handler.js"></script>
 	
 </head>
+
+<body>
+
+	<header class="class-main-header">
+		<div class="class-header-left">
+			<button id="id-menu-toggle" class="class-toggle-btn">☰ Menü</button>
+		</div>
+		<div class="class-header-center">
+			<h1>WebProjekt</h1>
+		</div>
+		<div class="class-header-right">
+			<span id="id-datetime">Lade...</span>
+		</div>
+	</header>
+
+	<div class="class-main-container">
+		<aside id="id-sidebar" class="class-sidebar">
+			<nav>
+				<ul class="class-nav-list">
+					<li><a href="#" class="class-nav-link class-active-link" data-target="home">Startseite</a></li>
+					
+					<li class="class-has-submenu">
+						<button class="class-submenu-btn">Leistungen</button>
+						<ul class="class-submenu">
+							<li><a href="#" class="class-nav-link" data-target="design">Design</a></li>
+							<li><a href="#" class="class-nav-link" data-target="coding">Coding</a></li>
+						</ul>
+					</li>
+
+					<li class="class-has-submenu">
+						<button class="class-submenu-btn">Table</button>
+						<ul class="class-submenu">
+							<li><a href="#" class="class-nav-link" data-target="target_id_data_table" data-content="example">Example</a></li>
+							<li><a href="#" class="class-nav-link" data-target="target_id_data_table" data-content="wifi">Wifi</a></li>
+							<li><a href="#" class="class-nav-link" data-target="target_id_chart" data-content="example">Chart</a></li>
+						</ul>
+					</li>
+
+					<li><a href="#" class="class-nav-link" data-target="kontakt">Kontakt</a></li>
+				</ul>
+			</nav>
+		</aside>
+
+		<main class="class-content">
+			<section id="home" class="class-content-section active">
+				<h2>Willkommen</h2>
+				<p>Das ist die Startseite.</p>
+			</section>
+
+            <section id="target_id_data_wifi" class="class-content-section">
+				<p style="margin-bottom: 20px;">Diese Tabelle wurde mit Tabulator.io erstellt:</p>
+				<button id="history-undo">Undo Edit</button>
+				<div id="id_data_wifi"></div>
+			</section>
+
+			<section id="target_id_data_table" class="class-content-section">
+				<p style="margin-bottom: 20px;">Diese Tabelle wurde mit Tabulator.io erstellt:</p>
+				<button id="history-undo">Undo Edit</button>
+				<div id="id_data_table"></div>
+			</section>
+			
+			<section id="target_id_chart" class="class-content-section">
+				<p style="margin-bottom: 20px;">Diese Tabelle wurde mit Chart.js erstellt:</p>
+				<canvas id="id_chart_table"></canvas>
+			</section>
+
+			<section id="design" class="class-content-section">
+				<h2>Design Leistungen</h2>
+				<p>Hier erfährst du alles über unsere Design-Prozesse.</p>
+			</section>
+
+			<section id="coding" class="class-content-section">
+				<h2>Coding & Entwicklung</h2>
+				<p>Wir programmieren moderne Web-Apps.</p>
+			</section>
+
+			<section id="kontakt" class="class-content-section">
+				<h2>Kontakt</h2>
+				<p>Schreibe uns eine E-Mail!</p>
+			</section>
+
+		</main>
+	</div>
+
+	<footer class="class-main-footer">
+		<p>&copy; 2026 Mein Webprojekt</p>
+	</footer>
