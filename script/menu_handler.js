@@ -47,10 +47,40 @@ submenuButtons = document.querySelectorAll('.class-submenu-btn');
 /***********************************************************************
 * Constant
 ***********************************************************************/
-defaul_sidemenu_data = [
-    { id: 1, name: "Max Mustermann", age: 30 },
-    { id: 2, name: "Erika Musterfrau", age: 25 },
-    { id: 3, name: "John Doe", age: 40 }
+const default_sidebarData = [
+  {
+    "type": "link",
+    "href": "#",
+    "text": "Startseite",
+    "className": "class-nav-link class-active-link",
+    "dataTarget": "home"
+  },
+  {
+    "type": "submenu",
+    "buttonText": "Leistungen",
+    "buttonClass": "class-submenu-btn",
+    "items": [
+      { "href": "#", "text": "Design", "class": "class-nav-link", "dataTarget": "design" },
+      { "href": "#", "text": "Coding", "class": "class-nav-link", "dataTarget": "coding" }
+    ]
+  },
+  {
+    "type": "submenu",
+    "buttonText": "Table",
+    "buttonClass": "class-submenu-btn",
+    "items": [
+      { "href": "#", "text": "Example", "class": "class-nav-link", "dataTarget": "target_id_data_table", "dataContent": "example" },
+      { "href": "#", "text": "Wifi", "class": "class-nav-link", "dataTarget": "target_id_data_table", "dataContent": "wifi" },
+      { "href": "#", "text": "Chart", "class": "class-nav-link", "dataTarget": "target_id_chart", "dataContent": "example" }
+    ]
+  },
+  {
+    "type": "link",
+    "href": "#",
+    "text": "Kontakt",
+    "className": "class-nav-link",
+    "dataTarget": "kontakt"
+  }
 ];
 /***********************************************************************
 * Local Funtions
@@ -100,7 +130,7 @@ function get_sidemenu_data() {
     // Prüfen, ob wir lokal über das file:// Protokoll unterwegs sind
     // Falls ja, direkt die Default-Daten laden, ohne fetch zu versuchen
     if (window.location.protocol === 'file:') {
-        set_sidemenu_data(defaul_sidemenu_data);
+        renderSidebar(default_sidebarData);
         return;
     }
 
@@ -111,24 +141,73 @@ function get_sidemenu_data() {
 			}
 			return response.json(); // Parses JSON response into JavaScript objects
 		})
-		.then(data => {set_sidemenu_data(data);})
+		.then(data => {renderSidebar(data);})
 		//.catch(error => console.warn('There was a problem with your fetch operation:', error));
-        .catch(error => {set_sidemenu_data(defaul_sidemenu_data);});
+        .catch(error => {renderSidebar(default_sidebarData);});
 
 }
 
 
 /***********************************************************************
-*! \fn          set_sidemenu_data(data)
+*! \fn          renderSidebar(data)
 *  \brief       displays the data in the side menu
 *  \param       data - data to be displayed in the side menu
 *  \exception   none
 *  \return      none
 ***********************************************************************/  
-function set_sidemenu_data(data) {
+function renderSidebar(data) {
+    const sidebar = document.getElementById('id-sidebar');
+    if (!sidebar) return;
 
-    console.log("set_sidemenu_data", data);
+    // Grundstruktur aufbauen
+    const nav = document.createElement('nav');
+    const ulMain = document.createElement('ul');
+    ulMain.className = 'class-nav-list';
 
+    data.forEach(node => {
+        const li = document.createElement('li');
+
+        if (node.type === 'link') {
+            const a = document.createElement('a');
+            a.href = node.href;
+            a.className = node.className;
+            a.textContent = node.text;
+            if (node.dataTarget) a.setAttribute('data-target', node.dataTarget);
+            li.appendChild(a);
+        } 
+        else if (node.type === 'submenu') {
+            li.className = 'class-has-submenu';
+
+            const btn = document.createElement('button');
+            btn.className = node.buttonClass;
+            btn.textContent = node.buttonText;
+            li.appendChild(btn);
+
+            const ulSub = document.createElement('ul');
+            ulSub.className = 'class-submenu';
+
+            node.items.forEach(subItem => {
+                const subLi = document.createElement('li');
+                const subA = document.createElement('a');
+                subA.href = subItem.href;
+                subA.className = subItem.class;
+                subA.textContent = subItem.text;
+                
+                if (subItem.dataTarget) subA.setAttribute('data-target', subItem.dataTarget);
+                if (subItem.dataContent) subA.setAttribute('data-content', subItem.dataContent);
+
+                subLi.appendChild(subA);
+                ulSub.appendChild(subLi);
+            });
+
+            li.appendChild(ulSub);
+        }
+
+        ulMain.appendChild(li);
+    });
+
+    nav.appendChild(ulMain);
+    sidebar.appendChild(nav);
 }
 
 /***********************************************************************
