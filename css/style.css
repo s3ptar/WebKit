@@ -29,7 +29,7 @@ body {
 /***********************************************************************
 * Header & Footer *
 ***********************************************************************/
-.class-main-header { 
+.main-header { 
     background: #2c3e50; 
     color: white; 
     height: 60px; 
@@ -37,16 +37,16 @@ body {
     align-items: center; 
     padding: 0 20px; 
 }
-.class-header-left, .class-header-right { flex: 1; }
-.class-header-center { 
+.header-left, .header-right { flex: 1; }
+.header-center { 
     flex: 2; 
     text-align: center; 
 }
-.class-header-right { 
+.header-right { 
     text-align: right; 
     font-family: monospace; 
 }
-.class-toggle-btn { 
+.toggle-btn { 
     background: #34495e; 
     color: white; 
     border: none; 
@@ -59,22 +59,22 @@ body {
 /***********************************************************************
 * Layout *
 ***********************************************************************/
-.class-main-container { display: flex; flex: 1; }
-.class-sidebar { 
+.main-container { display: flex; flex: 1; }
+.sidebar { 
     width: 250px; 
     background: #f8f9fa; 
     border-right: 1px solid #ddd; 
     transition: 0.3s; }
-.class-content { flex: 1; padding: 30px; }
+.content { flex: 1; padding: 30px; }
 
 /***********************************************************************
 * Inhalts-Umschaltung Logik *
 ***********************************************************************/
-.class-content-section {
+.content-section {
     display: none; /* Standardmäßig alle verstecken */
 }
 
-.class-content-section.active {
+.content-section.active {
     display: block; /* Nur die aktive Sektion zeigen */
     animation: fadeIn 0.5s; /* Kleiner Bonus-Effekt */
 }
@@ -93,8 +93,8 @@ body {
 /***********************************************************************
 * Sidebar & Menü Styles *
 ***********************************************************************/
-.class-nav-list, .class-submenu { list-style: none; }
-.class-nav-list li a, .class-submenu-btn { 
+.nav-list, .submenu { list-style: none; }
+.nav-list li a, .submenu-btn { 
     display: block;
     width: 100%; 
     padding: 15px 20px; 
@@ -107,13 +107,13 @@ body {
     border: none;
     font-size: 15px;
 }
-.class-submenu-btn::after {
+.submenu-btn::after {
     /* content: '\27A4';  Unicode für Pfeil nach rechts: → */
     content: '+';
     position: absolute;
 }
 /* Optional: Pfeil drehen, wenn das Menü offen ist (für Submenüs) */
-.class-has-submenu.open .class-submenu-btn::after {
+.has-submenu.open .submenu-btn::after {
     /* transform: translateY(-50%) rotate(90deg); /* Pfeil nach unten drehen */
     content: '-';
 }
@@ -121,19 +121,19 @@ body {
 /***********************************************************************
 * Die Highlight-Klasse für das aktive Element *
 ***********************************************************************/
-.class-active-link {
+.active-link {
     background: #e9ecef !important;
     color: #2980b9 !important;
     font-weight: bold;
     border-left: 5px solid #2980b9; /* Blauer Balken links als visueller Akzent */
 }
 
-.class-submenu { 
+.submenu { 
     display: none; 
     background: #f1f3f5; 
 }
-.class-has-submenu.open .class-submenu { display: block; }
-.class-main-footer { 
+.has-submenu.open .submenu { display: block; }
+.main-footer { 
     background: #2c3e50; 
     color: white; 
     text-align: center; 
@@ -144,7 +144,7 @@ body {
 * Responsive max Size *
 ***********************************************************************/
 @media (max-width: 1000px) {
-    .class-sidebar { 
+    .sidebar { 
         position: fixed; 
         left: 0; 
         top: 60px; 
@@ -152,14 +152,14 @@ body {
         transform: translateX(-100%); 
         z-index: 1000; 
     }
-    .class-sidebar.active { transform: translateX(0); }
+    .sidebar.active { transform: translateX(0); }
 }
 
 /***********************************************************************
 * Responsive min Size (max Size + 1) *
 ***********************************************************************/
 @media (min-width: 1001px) {
-    .class-toggle-btn {
+    .toggle-btn {
         display: none;
     }
 }
